@@ -1,8 +1,11 @@
 //a func  that returns a promise to write a file or read files
 const fs = require('fs');
-
+const path = require('path')
 function ReadFile(filename) {
-    let filepath = "./" + filename;
+    let filepath = path.join(__dirname,filename);
+//     we use path.join to work over different platforms
+//     path.join can be also used to get files from the parent directory
+//     path.join(__dirname,"..")
     return new Promise((resolve, reject) => {
         fs.readFile(filepath, { encoding: 'ascii' }, (err, res) => {
             if (err) {
@@ -18,7 +21,7 @@ function ReadFile(filename) {
 
 
 function WriteFile(filename, data) {
-    let filepath = "./" + filename;
+    let filepath = path.join(__dirname,filename);
     let x = JSON.stringify(data);
     return new Promise((resolve, reject) => {
 
